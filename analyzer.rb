@@ -1,3 +1,7 @@
 lines = File.readlines("oliver.txt")
+puts "#{lines.size} lines"
+
 text = lines.join
-puts "line count is #{lines.size}"
+puts "#{text.split.length} words"
+puts "#{text.length} characters"
+puts "#{text.gsub(/\s+/, '').length} characters (excluding spaces)"
