@@ -5,16 +5,7 @@ class Dungeon
 		@player = Player.new(player_name)
 	end
   
-	def playername
-		@player.name
-	end
-  
-	class Player
-		attr_accessor :name
-		def initialize(player_name)
-			@name = player_name
-		end
-			end
+	Player = Struct.new(:name, :location)
 end
 
 d = Dungeon.new("Jeff")
