@@ -11,7 +11,7 @@ class Dungeon
 			@description = description
 			@connections = connections
 		end
-		
+
 		def full_description
 			"#{@name}\n\nYou are in #{@description}"
 		end
@@ -26,7 +26,7 @@ class Dungeon
 		@player.location = location
 		show_current_description
 	end
-	
+
 	def show_current_description
 		puts find_room_in_dungeon(@player.location).full_description
 	end
@@ -42,8 +42,8 @@ class Dungeon
 end
 
 d = Dungeon.new("Jeff")
-d.add_room(:smallcave, "Small Cave", "A claustriphobic, little cave", { :east => :largecave } )
-d.add_room(:largecave, "Large Cave", "A big, cavernous cave", { :west => :smallcave } )
+d.add_room(:smallcave, "Small Cave", "a claustriphobic, little cave", { :east => :largecave } )
+d.add_room(:largecave, "Large Cave", "a big, cavernous cave", { :west => :smallcave } )
 
 puts "Welcome #{d.player.name}!!!\n\n"
 d.start(:smallcave)
