@@ -30,7 +30,11 @@ class Dungeon
 	def show_current_description
 		puts find_room_in_dungeon(@player.location).full_description
 	end
-	
+
+	def find_room_in_direction(direction)
+		find_room_in_dungeon(@player.location).connections[direction]
+	end
+
 	def add_room(reference, name, description, connections)
 		@rooms << Room.new(reference, name, description, connections)
 	end
@@ -39,6 +43,11 @@ class Dungeon
 		rooms.detect { |room| room.reference == reference }
 	end
 	
+	def go(direction)
+		puts "You go " + direction.to_s
+		@player.location = find_room_in_direction(direction)
+		show_current_description
+	end
 end
 
 d = Dungeon.new("Jeff")
@@ -47,3 +56,4 @@ d.add_room(:largecave, "Large Cave", "a big, cavernous cave", { :west => :smallc
 
 puts "Welcome #{d.player.name}!!!\n\n"
 d.start(:smallcave)
+d.go(:east)
