@@ -1,5 +1,5 @@
 require 'sqlite3'
-database = SQLite3::Database.new( "new.database" )
+database = SQLite3::Database.new( "newsqlite.db" )
  
 database.execute( "create table sample_table (id INTEGER PRIMARY KEY, sample_text TEXT, sample_number NUMERIC);" )
  

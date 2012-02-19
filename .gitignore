@@ -1,4 +1,5 @@
-doc
 Book
+Doc
+*.db
 *.txt
 pstorefile

@@ -1,8 +1,8 @@
 require 'sqlite3'
-File.exists?('sqlitedb') && File.delete('sqlitedb')
+File.exists?('sqlite.db') && File.delete('sqlite.db')
 puts "hello, world"
 
-$db = SQLite3::Database.new("sqlitedb")
+$db = SQLite3::Database.new("sqlite.db")
 $db.results_as_hash = true
 #$stdout.sync = true
 
