@@ -4,4 +4,4 @@ if ARGV == [] then
 end
 $stdout.sync = true
 
-File.write(ARGV[1], File.read(ARGV[0]))
+File.copy_stream(ARGV[0], ARGV[1])
