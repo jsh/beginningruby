@@ -11,8 +11,6 @@ from_file, to_file = ARGV
 infile = File.open(from_file)
 contents = infile.read
 
-STDIN.gets
-
 outfile = File.open(to_file, 'w')
 outfile.write(contents)
 
