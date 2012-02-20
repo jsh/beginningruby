@@ -26,8 +26,8 @@ rewind(current_file)
 current_line = 1
 print_a_line(current_line, current_file)
 
-current_line = current_line + 1
+current_line += 1
 print_a_line(current_line, current_file)
 
-current_line = current_line + 1
+current_line += 1
 print_a_line(current_line, current_file)
