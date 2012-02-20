@@ -8,6 +8,6 @@ from_file, to_file = ARGV
 
 
 
-contents = File.open(from_file).read
+contents = File.read(from_file)
 
 File.open(to_file, 'w').write(contents)
