@@ -4,9 +4,4 @@ if ARGV == [] then
 end
 $stdout.sync = true
 
-from_file, to_file = ARGV
-
-
-
-
-File.write(to_file, File.read(from_file))
+File.write(ARGV[1], File.read(ARGV[0]))
