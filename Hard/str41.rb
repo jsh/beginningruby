@@ -115,3 +115,17 @@ DESC
 $description[nil] =<<DESC
 DOES NOT COMPUTE
 DESC
+
+
+$choices = {
+	:central_corridor => ['shoot!', 'dodge!', 'tell joke'],
+	:the_bridge => ['throw the bomb', 'slowly place the bomb'],
+	:escape_pod => [1,2,3,4,5],
+	:laser_weapon_armory => ['keypad'],
+}
+
+$cheatcode = {
+	:central_corridor => 'tell joke',
+	:the_bridge => 'slowly place the bomb',
+	:laser_weapon_armory => 'xxx',
+}

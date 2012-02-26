@@ -2,9 +2,10 @@
 
 require "str41.rb"
 
-def prompt()
-	$stdout.sync = true
-	print "> "
+def prompt(room)
+	#print "[%s]>" % [ $choices[room].join(',') , $prompt_str[room] ]
+	choices = $choices[room].join(', ')
+	print "[%s]> " % choices.sub($cheatcode[room], $cheatcode[room] + '*')
 end
 
 def death()
@@ -18,23 +19,22 @@ end
 
 def central_corridor()
 	puts $description[:central_corridor]
-	prompt()
+
+	prompt(:central_corridor)
 	action = gets.chomp()
 
+	puts $description[action.to_sym]
+
 	if action == "shoot!"
-		puts $description[:shoot!]
 		return :death
 		
 	elsif action == "dodge!"
-		puts $description[:dodge!]
 		return :death
 
 	elsif action == "tell joke"
-		puts $description[:"tell joke"]
 		return :laser_weapon_armory
 
 	else
-		puts $description[nil]
 		return :central_corridor
 	end
 	
@@ -42,28 +42,30 @@ end
 
 def laser_weapon_armory()
 
-	puts $description[:laser_weapon_armory]
-	code = "%s%s%s" % [ rand(9)+1, rand(9)+1, rand(9)+1 ]
-	puts "#{code}"
-
 	guesses = 0
-	print "[keypad]> "
+	code = "%s%s%s" % [ rand(9)+1, rand(9)+1, rand(9)+1 ]
+
+	$choices[:laser_weapon_armory] = [code]
+
+	puts $description[:laser_weapon_armory]
+	prompt(:laser_weapon_armory)
 	guess = gets.chomp()
 	
 	while guess != code and guesses < 10
-		puts "BUZZZ!"
 		guesses = guesses + 1
-		print "[keypad]> "
+
+		puts "BUZZZ!"
+		prompt(:laser_weapon_armory)
 		guess = gets.chomp()
 	end
 
-	puts "#{guess}"
 	
-	if guess == code
-		puts $description[:good_guess]
+	guess_type = (guess == code) ? :good_guess : :bad_guess
+	puts $description[guess_type]
+	
+	if guess_type == :good_guess
 		return :the_bridge
 	else
-		puts $description[:bad_guess]
 		return :death
 	end
 end
@@ -71,33 +73,35 @@ end
 def the_bridge()
 
 	puts $description[:the_bridge]
-	prompt()
+	prompt(:the_bridge)
 	action = gets.chomp()
+
+	puts $description[action.to_sym]
 	
 	if action == "throw the bomb"
-		puts $description[:"throw the bomb"]
 		return :death
 	elsif action ==  "slowly place the bomb"
-		puts $description[:"slowly place the bomb"]
 		return :escape_pod
 	else
-		puts $description[nil]
 		return :the_bridge
 	end
 end
 
 def escape_pod
 
-	puts $description[:escape_pod]
 	good_pod = rand(5) + 1
-	print "[pod #]> "
+
+	puts $description[:escape_pod]
+	$cheatcode[:escape_pod] = good_pod.to_s
+	prompt(:escape_pod)
 	guess = gets.chomp()
 
+	guess_type = (guess.to_i == good_pod) ? :good_pod : :bad_pod
+	puts $description[guess_type]
+
 	if guess.to_i != good_pod
-		puts $description[:bad_pod]
 		return :death
 	else
-		puts $description[:good_pod]
 		Process.exit(0)
 	end
 end
